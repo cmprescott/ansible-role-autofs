@@ -4,3 +4,8 @@
 autofs_pkgs:
   Linux: [ 'autofs' ]
   Darwin: []
+
+autofs_master:
+  Linux: "/etc/auto.master"
+  Darwin: "/etc/auto_master"
+
