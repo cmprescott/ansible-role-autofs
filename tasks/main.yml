@@ -26,3 +26,8 @@
   file: path="{{ autofs_indirect_maps[path] }}" state=directory
   with_items: autofs_indirect_maps
 
+
+- name: "Config| all | create indirect map file(s) from template"
+  template: src="indirect_map.j2" dest="/etc/{{ autofs_indirect_maps[name] }}" mode=600
+  with_items: autofs_indirect_maps
+
