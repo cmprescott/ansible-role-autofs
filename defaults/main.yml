@@ -1,2 +1,6 @@
 ---
 # defaults file for ansible-role-autofs
+
+autofs_pkgs:
+  Linux: [ 'autofs' ]
+  Darwin: []
