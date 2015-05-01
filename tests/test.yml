@@ -1,3 +1,10 @@
 - hosts: all
+  vars:
+    autofs_indirect_maps:
+    - name: autofs.test
+      path: /mnt/test
+      mounts: []
   roles:
     - role: ../..
+      sudo: Yes
+

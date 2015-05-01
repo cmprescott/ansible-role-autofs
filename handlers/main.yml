@@ -1,2 +1,13 @@
 ---
 # handlers file for ansible-role-autofs
+
+
+- name: "restart autofs"
+  service: name=autofs state=restarted
+  when: ansible_system == 'Linux'
+
+
+- name: "reload autofs"
+  command: automount -vc
+  when: ansible_system == 'Darwin'
+
