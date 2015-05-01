@@ -1,6 +1,21 @@
 ---
 # defaults file for ansible-role-autofs
 
+# --- OS setup ---
 autofs_pkgs:
   Linux: [ 'autofs' ]
   Darwin: []
+
+# --- OS config ---
+autofs_master:
+  Linux: "/etc/auto.master"
+  Darwin: "/etc/auto_master"
+
+# --- autofs config ---
+autofs_indirect_maps: []
+#  - name: autofs.nfs
+#    path: /mnt/nfs
+#    mounts:
+#      - name: "isos" 
+#        fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
+#        url: "nfs.server.com:/data/isos"

@@ -20,3 +20,19 @@
   with_items: autofs_pkgs[ ansible_system ]
   when: ansible_pkg_mgr == 'zypper'
 
+
+# ----- Config -----
+- name: "Config| all | ensure indirect map paths(s) exist"
+  file: path="{{ autofs_indirect_maps[path] }}" state=directory
+  with_items: autofs_indirect_maps
+
+
+- name: "Config| all | create indirect map file(s) from template"
+  template: src="indirect_map.j2" dest="/etc/{{ autofs_indirect_maps[name] }}" mode=600
+  with_items: autofs_indirect_maps
+
+
+- name: "Config| all | add indirect map file(s) to autofs master file"
+  lineinfile: dest="{{ autofs_path_master[ ansible_system ] }}" line="{{ autofs_indirect_maps[path] }}     {{ autofs_indirect_maps[name] }}"
+  with_items: autofs_indirect_maps
+
