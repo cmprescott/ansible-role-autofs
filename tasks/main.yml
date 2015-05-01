@@ -36,3 +36,8 @@
   lineinfile: dest="{{ autofs_path_master[ ansible_system ] }}" line="{{ autofs_indirect_maps[path] }}     {{ autofs_indirect_maps[name] }}"
   with_items: autofs_indirect_maps
 
+
+# ----- Service -----
+- name: "Svc   |linux| ensure autofs starts at boot"
+  service: name=autofs state=started enabled=yes
+  when: ansible_system == 'Linux'
