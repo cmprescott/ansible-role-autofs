@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
 
 {% for mount in item.mounts %}
-{{ mount[name] }} -fstype={{ mount[fstype] }} {{ mount[url] }}
+{{ mount.name }} -fstype={{ mount.fstype }} {{ mount.url }}
 {% endfor %}
+
