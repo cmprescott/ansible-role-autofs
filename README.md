@@ -11,7 +11,7 @@ Requirements
 # Ansible version 1.4.4+
 ansible --version
 
-, 
+# OS
 case $OSTYPE in
   # Linux needs apt|yum|zypper
   "linux"*)
