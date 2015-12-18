@@ -21,6 +21,12 @@
   when: ansible_pkg_mgr == 'zypper'
 
 
+- name: "Setup | dnf | ensure autofs's package(s) present"
+  dnf: name="{{ item }}"
+  with_items: autofs_pkgs[ ansible_system ]
+  when: ansible_pkg_mgr == 'dnf'
+
+
 # ----- Config -----
 - name: "Config| all | ensure indirect map paths(s) exist"
   file: path="{{ item.path }}" state=directory
@@ -43,4 +49,3 @@
 - name: "Svc   |linux| ensure autofs starts at boot"
   service: name=autofs state=started enabled=yes
   when: ansible_system == 'Linux'
-
