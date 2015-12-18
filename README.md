@@ -13,9 +13,9 @@ ansible --version
 
 # OS
 case $OSTYPE in
-  # Linux needs apt|yum|zypper
+  # Linux needs apt|yum|dnf|zypper
   "linux"*)
-      apt --version||yum --version||zypper --version;;
+      apt --version||yum --version||dnf --version||zypper --version;;
   # OS X needs nothing
   "darwin"*)
       echo autofs is OOB;;
