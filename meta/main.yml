@@ -3,7 +3,7 @@ galaxy_info:
   author: Prescott Chris
   description: Installs and configures autofs
   license: BSD
-  min_ansible_version: 1.4.4
+  min_ansible_version: 1.9
   platforms:
   - name: GenericLinux
     versions:
