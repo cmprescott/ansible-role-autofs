@@ -5,43 +5,43 @@
 # ----- Setup -----
 - name: "Setup | apt | ensure autofs's package(s) present"
   apt: name="{{ item }}"
-  with_items: autofs_pkgs[ ansible_system ]
+  with_items: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'apt'
 
 
 - name: "Setup | yum | ensure autofs's package(s) present"
   yum: name="{{ item }}"
-  with_items: autofs_pkgs[ ansible_system ]
+  with_items: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'yum'
 
 
 - name: "Setup | zyp | ensure autofs's package(s) present"
   zypper: name="{{ item }}"
-  with_items: autofs_pkgs[ ansible_system ]
+  with_items: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'zypper'
 
 
 - name: "Setup | dnf | ensure autofs's package(s) present"
   dnf: name="{{ item }}"
-  with_items: autofs_pkgs[ ansible_system ]
+  with_items: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'dnf'
 
 
 # ----- Config -----
 - name: "Config| all | ensure indirect map paths(s) exist"
   file: path="{{ item.path }}" state=directory
-  with_items: autofs_indirect_maps
+  with_items: "{{ autofs_indirect_maps }}"
 
 
 - name: "Config| all | create indirect map file(s) from template"
   template: src="indirect_map.j2" dest="/etc/{{ item.name }}" mode=644
-  with_items: autofs_indirect_maps
+  with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
 
 
 - name: "Config| all | add indirect map file(s) to autofs master file"
   lineinfile: dest="{{ autofs_master[ ansible_system ] }}" line="{{ item.path }}     {{ item.name }}"
-  with_items: autofs_indirect_maps
+  with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
 
 
