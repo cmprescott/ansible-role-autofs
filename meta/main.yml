@@ -8,12 +8,9 @@ galaxy_info:
   - name: GenericLinux
     versions:
     - any
-  - name: Darwin
-    versions:
-    - any
   categories:
   - system
 
 dependencies: []
-  
+
 ...
