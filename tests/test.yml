@@ -1,10 +1,16 @@
 - hosts: all
   vars:
     autofs_indirect_maps:
-    - name: autofs.test
-      path: /mnt/test
-      mounts: []
+      - name: autofs.test
+        path: /mnt/test
+        mounts:
+          - name: "backupsnj"
+            fstype: "rw,nosuid"
+            url: "/home/travis/backupsnj"
+          - name: "ivydb"
+            fstype: "rw,nosuid"
+            url: "/home/travis/ivydb"
   roles:
     - role: ../..
-      sudo: Yes
-
+      become: Yes
+      
