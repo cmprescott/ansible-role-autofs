@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+{{ ansible_managed | comment }}
 
 {% for mount in item.mounts %}
 {{ mount.name }} -fstype={{ mount.fstype }} {{ mount.url }}
