@@ -15,6 +15,7 @@ autofs_master:
 autofs_indirect_maps: []
 #  - name: autofs.nfs
 #    path: /mnt/nfs
+#    options: ""
 #    mounts:
 #      - name: "isos" 
 #        fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
