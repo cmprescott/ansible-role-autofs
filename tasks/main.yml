@@ -40,7 +40,7 @@
 
 
 - name: "Config| all | add indirect map file(s) to autofs master file"
-  lineinfile: dest="{{ autofs_master[ ansible_system ] }}" line="{{ item.path }}     {{ item.name }}"
+  lineinfile: dest="{{ autofs_master[ ansible_system ] }}" line="{{ item.path }}     /etc/{{ item.name }}"
   with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
 
