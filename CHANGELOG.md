@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Options configuration item for indirect_maps
 
 ## [0.2.3] - 2016-09-07
 ### Added

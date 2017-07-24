@@ -30,6 +30,7 @@ Role Variables
 autofs_indirect_maps:
   - name: autofs.nfs
     path: /mnt/nfs
+    options: "uid=1000,gid=1000,--ghost,--timeout=30"
     mounts:
       - name: "isos" 
         fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
