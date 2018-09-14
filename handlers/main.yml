@@ -4,7 +4,7 @@
 
 - name: "restart autofs"
   service: name=autofs state=restarted
-  when: ansible_system == 'Linux'
+  when: ansible_system == 'Linux' and ansible_connection != 'chroot'
 
 
 - name: "reload autofs"
