@@ -1,6 +1,6 @@
 Ansible Role: autofs
 =========
-[![Build Status](https://travis-ci.org/cmprescott/ansible-role-autofs.svg?branch=master)](https://travis-ci.org/cmprescott/ansible-role-autofs)
+[![Build Status](https://travis-ci.org/benyanke/ansible-autofs-ng.svg?branch=master)](https://travis-ci.org/benyanke/ansible-autofs-ng)
 
 Installs and configures autofs.
 
@@ -62,10 +62,11 @@ Example Playbook
   roles:
     - name: "Media Client | NFS | ensure automounts"
       sudo: yes
-      role: cmprescott.autofs
+      role: benyanke.ansible-autofs-ng
       autofs_indirect_maps:
-        - name: "auto.nfs" 
+        - name: "auto.nfs"
           path: "/mnt/nfs"
+          options: "--timeout=30 --ghost"
           mounts: 
             - name: "movies" 
               fstype: "nfs,rw,bg,hard,intr,tcp,resvport" 
@@ -83,4 +84,5 @@ BSD
 Author Information
 ------------------
 
-Prescott Chris
+Fork by Ben Yanke
+Original by Prescott Chris
