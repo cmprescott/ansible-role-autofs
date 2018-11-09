@@ -18,7 +18,7 @@ galaxy_info:
     - glusterfs
     - cifs
     - nfs
-    - network mounts
-    - network shares
+    - network-mounts
+    - network-shares
 
 dependencies: []
