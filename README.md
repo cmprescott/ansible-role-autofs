@@ -62,7 +62,7 @@ Example Playbook
   roles:
     - name: "Media Client | NFS | ensure automounts"
       sudo: yes
-      role: benyanke.ansible-autofs-ng
+      role: benyanke.autofs_ng
       autofs_indirect_maps:
         - name: "auto.nfs"
           path: "/mnt/nfs"
