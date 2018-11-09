@@ -67,9 +67,10 @@ Example Playbook
       become_method: sudo
       role: benyanke.autofs_ng
       autofs_indirect_maps:
-        - name: "auto.nfs"
+
+        - name: "auto.nfs-nas"
           path: "/mnt/nfs"
-          mark: "unique identifier for idempotency"
+          mark: "nfs mounts from NAS"
           options: "--timeout=30 --ghost"
           mounts:
             - name: "movies"
@@ -78,6 +79,15 @@ Example Playbook
             - name: "tv"
               fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
               url: "nfs.server.com:/data/tv"
+
+        - name: "auto.nfs-other"
+          path: "/-"
+          mark: "NFS mount with root base"
+          options: "--timeout=30 --ghost"
+          mounts:
+            - name: "/var/remotedir"
+              fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
+              url: "nfs.server.com:/data/remotedir"
 ```
 
 License
