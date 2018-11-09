@@ -4,10 +4,13 @@
 
 # ----- Setup -----
 - name: "Setup | apt | ensure autofs's package(s) present"
-  apt: name="{{ item }}"
-  with_items: "{{ autofs_pkgs[ ansible_system ] }}"
+  apt:
+    state: present
+    name: "{{ packages }}"
+    update_cache: yes
+  vars:
+    packages: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'apt'
-
 
 - name: "Setup | yum | ensure autofs's package(s) present"
   yum: name="{{ item }}"

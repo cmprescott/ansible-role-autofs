@@ -63,7 +63,8 @@ Example Playbook
   hosts: clients.media
   roles:
     - name: "Media Client | NFS | ensure automounts"
-      sudo: yes
+      become: true
+      become_method: sudo
       role: benyanke.autofs_ng
       autofs_indirect_maps:
         - name: "auto.nfs"
