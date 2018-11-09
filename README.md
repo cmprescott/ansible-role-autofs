@@ -30,8 +30,10 @@ Role Variables
 autofs_indirect_maps:
   - name: autofs.nfs
     path: /mnt/nfs
+    mark: "unique identifier for idempotency"
+    options: "--timeout=30 --ghost"
     mounts:
-      - name: "isos" 
+      - name: "isos"
         fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
         url: "nfs.server.com:/data/isos"
 
@@ -66,10 +68,11 @@ Example Playbook
       autofs_indirect_maps:
         - name: "auto.nfs"
           path: "/mnt/nfs"
+          mark: "unique identifier for idempotency"
           options: "--timeout=30 --ghost"
-          mounts: 
-            - name: "movies" 
-              fstype: "nfs,rw,bg,hard,intr,tcp,resvport" 
+          mounts:
+            - name: "movies"
+              fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
               url: "nfs.server.com:/data/movies"
             - name: "tv"
               fstype: "nfs,rw,bg,hard,intr,tcp,resvport"
