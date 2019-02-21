@@ -6,5 +6,5 @@
       mounts: []
   roles:
     - role: ../..
-      sudo: Yes
-
+      become: true
+      become_method: sudo
