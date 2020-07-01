@@ -26,6 +26,10 @@
   dnf: name="{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'dnf'
 
+- name: "Setup | pacman | ensure autofs's package(s) present"
+  pacman: name="{{ autofs_pkgs[ ansible_system ] }}"
+  when: ansible_pkg_mgr == 'pacman'
+
 
 # ----- Config -----
 - name: "Config | all | ensure indirect map paths(s) exist"
@@ -37,6 +41,13 @@
   template: src="indirect_map.j2" dest="/etc/{{ item.name }}" mode=0644
   with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
+  when: ansible_distribution != 'Archlinux'
+
+- name: "Config | Arch | create indirect map file(s) from template"
+  template: src="indirect_map.j2" dest="/etc/autofs/{{ item.name }}" mode=0644
+  with_items: "{{ autofs_indirect_maps }}"
+  notify: [ 'restart autofs', 'reload autofs']
+  when: ansible_distribution == 'Archlinux'
 
 - name: "Config | all | add indirect map file(s) to autofs master file"
   blockinfile:
@@ -46,6 +57,17 @@
       {{ item.path }}    {{ item.name }} {{ item.options | default ("") }}
   with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
+  when: ansible_distribution != 'Archlinux'
+
+- name: "Config | Arch | add indirect map file(s) to autofs master file"
+  blockinfile:
+    dest: "{{ autofs_master[ ansible_distribution ] }}"
+    marker: "# {mark} MANAGED BY ANSIBLE ROLE benyanke.autofs_ng - MARK : {{ item.mark | default (item.path + item.name) }}"
+    block: |
+      {{ item.path }}    {{ item.name }} {{ item.options | default ("") }}
+  with_items: "{{ autofs_indirect_maps }}"
+  notify: [ 'restart autofs', 'reload autofs']
+  when: ansible_distribution == 'Archlinux'
 
 
 # ----- Service -----
