@@ -1,6 +1,6 @@
 Ansible Role: autofs
 =========
-[![Build Status](https://travis-ci.org/github/cmprescott/ansible-role-autofs.svg?branch=master)](https://travis-ci.org/github/cmprescott/ansible-role-autofs)
+[![Build Status](https://travis-ci.org/cmprescott/ansible-role-autofs.svg?branch=master)](https://travis-ci.org/cmprescott/ansible-role-autofs)
 
 Installs and configures autofs.
 
@@ -65,7 +65,7 @@ Example Playbook
     - name: "Media Client | NFS | ensure automounts"
       become: true
       become_method: sudo
-      role: benyanke.autofs_ng
+      role: cmprescott.autofs
       autofs_indirect_maps:
 
         - name: "auto.nfs-nas"
