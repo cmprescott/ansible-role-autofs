@@ -16,11 +16,9 @@
   yum: name="{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'yum'
 
-
 - name: "Setup | zyp | ensure autofs's package(s) present"
   zypper: name="{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'zypper'
-
 
 - name: "Setup | dnf | ensure autofs's package(s) present"
   dnf: name="{{ autofs_pkgs[ ansible_system ] }}"
@@ -35,7 +33,6 @@
 - name: "Config | all | ensure indirect map paths(s) exist"
   file: path="{{ item.path }}" state=directory
   with_items: "{{ autofs_indirect_maps }}"
-
 
 - name: "Config | all | create indirect map file(s) from template"
   template: src="indirect_map.j2" dest="/etc/{{ item.name }}" mode=0644
@@ -52,7 +49,7 @@
 - name: "Config | all | add indirect map file(s) to autofs master file"
   blockinfile:
     dest: "{{ autofs_master[ ansible_system ] }}"
-    marker: "# {mark} MANAGED BY ANSIBLE ROLE benyanke.autofs_ng - MARK : {{ item.mark | default (item.path + item.name) }}"
+    marker: "# {mark} MANAGED BY ANSIBLE : {{ item.mark | default (item.path + item.name) }}"
     block: |
       {{ item.path }}    {{ item.name }} {{ item.options | default ("") }}
   with_items: "{{ autofs_indirect_maps }}"
@@ -62,7 +59,7 @@
 - name: "Config | Arch | add indirect map file(s) to autofs master file"
   blockinfile:
     dest: "{{ autofs_master[ ansible_distribution ] }}"
-    marker: "# {mark} MANAGED BY ANSIBLE ROLE benyanke.autofs_ng - MARK : {{ item.mark | default (item.path + item.name) }}"
+    marker: "# {mark} MANAGED BY ANSIBLE : {{ item.mark | default (item.path + item.name) }}"
     block: |
       {{ item.path }}    {{ item.name }} {{ item.options | default ("") }}
   with_items: "{{ autofs_indirect_maps }}"
