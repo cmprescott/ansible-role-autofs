@@ -9,6 +9,7 @@ autofs_pkgs:
 # --- OS config ---
 autofs_master:
   Linux: "/etc/auto.master"
+  Archlinux: "/etc/autofs/auto.master"
   Darwin: "/etc/auto_master"
 
 # --- autofs config ---
