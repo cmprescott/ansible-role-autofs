@@ -1,6 +1,6 @@
 Ansible Role: autofs
 =========
-[![Build Status](https://travis-ci.org/benyanke/ansible-autofs-ng.svg?branch=master)](https://travis-ci.org/benyanke/ansible-autofs-ng)
+[![Build Status](https://travis-ci.org/github/cmprescott/ansible-role-autofs.svg?branch=master)](https://travis-ci.org/github/cmprescott/ansible-role-autofs)
 
 Installs and configures autofs.
 
@@ -98,5 +98,4 @@ BSD
 Author Information
 ------------------
 
-Fork by Ben Yanke
-Original by Prescott Chris
+Prescott Chris
