@@ -1,8 +1,8 @@
 galaxy_info:
-  role_name: autofs-ng
-  author: Ben Yanke
-  description: Installs and configures autofs. Based on cmprescott/ansible-role-autofs with bugfixes
-  issue_tracker_url: https://github.com/benyanke/ansible-role-autofs/issues
+  role_name: autofs
+  author: Prescott Chris
+  description: Installs and configures autofs.
+  issue_tracker_url: https://github.com/cmprescott/ansible-role-autofs/issues
   license: BSD
   min_ansible_version: 1.9
   platforms:
