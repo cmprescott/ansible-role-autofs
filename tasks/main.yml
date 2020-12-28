@@ -13,15 +13,19 @@
   when: ansible_pkg_mgr == 'apt'
 
 - name: "Setup | yum | ensure autofs's package(s) present"
-  yum: name="{{ autofs_pkgs[ ansible_system ] }}"
+  yum: 
+    name: "{{ autofs_pkgs[ ansible_system ] }}"
+    state: present
   when: ansible_pkg_mgr == 'yum'
 
 - name: "Setup | zyp | ensure autofs's package(s) present"
-  zypper: name="{{ autofs_pkgs[ ansible_system ] }}"
+  zypper:
+    name: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'zypper'
 
 - name: "Setup | dnf | ensure autofs's package(s) present"
-  dnf: name="{{ autofs_pkgs[ ansible_system ] }}"
+  dnf: 
+    name: "{{ autofs_pkgs[ ansible_system ] }}"
   when: ansible_pkg_mgr == 'dnf'
 
 - name: "Setup | pacman | ensure autofs's package(s) present"
@@ -31,11 +35,16 @@
 
 # ----- Config -----
 - name: "Config | all | ensure indirect map paths(s) exist"
-  file: path="{{ item.path }}" state=directory
+  file: 
+    path: "{{ item.path }}"
+    state: directory
   with_items: "{{ autofs_indirect_maps }}"
 
 - name: "Config | all | create indirect map file(s) from template"
-  template: src="indirect_map.j2" dest="/etc/{{ item.name }}" mode=0644
+  template:
+    src: "indirect_map.j2"
+    dest: "/etc/{{ item.name }}"
+    mode: 0644
   with_items: "{{ autofs_indirect_maps }}"
   notify: [ 'restart autofs', 'reload autofs']
   when: ansible_distribution != 'Archlinux'
@@ -69,9 +78,13 @@
 
 # ----- Service -----
 - name: "Svc   |linux| ensure autofs starts at boot"
-  service: name=autofs state=started enabled=yes
+  service:
+    name: "autofs"
+    state: started
+    enabled: yes
   when: ansible_system == 'Linux' and ansible_connection != 'chroot'
 
 - name: Enable autofs in chroot image
   command: systemctl enable autofs
   when: ansible_connection == 'chroot'
+
